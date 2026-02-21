@@ -1544,7 +1544,6 @@ Sprint 3     →  Exponential backoff retry, Dead Letter Queue, Security token v
 
 ---
 
-*Built as a Scrum team delivery for Congruent Technologies.*
 *Problem statement: "Build a Notification System for a Payroll System"*
 *Our answer: A production-grade event-driven microservice — designed, decided, and delivered the Agile way.*
 

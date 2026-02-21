@@ -1,6 +1,7 @@
 # 🔔 Notification Microservice — Payroll System
 
 > **TEAM A² - (AGILE × ALLIANCE)**
+> 
 > A Square (A²) represents the combination of Agile methodology and strong team alliance. It symbolizes how collaborative teamwork amplifies Agile practices to deliver efficient, iterative, and high-quality solutions.
 
 ---

@@ -1418,7 +1418,7 @@ Use the routing key and payload for each event. After publishing, check:
 
 **Payloads for each event are in [Section 12](#12-event-input-contracts).**
 
-**Testing Retry and DLQ (Optional Demo):**
+**Testing Retry and DLQ (Demo):**
 Temporarily set an invalid `TWILIO_AUTH_TOKEN` in `.env`, publish a `SalaryCredited` event, and watch in the terminal:
 ```
 "event": "notification_failed", "attempt": 1 → "delay_seconds": 1
@@ -1427,6 +1427,11 @@ Temporarily set an invalid `TWILIO_AUTH_TOKEN` in `.env`, publish a `SalaryCredi
 "event": "message_sent_to_dlq"
 ```
 Then check `notification_dlq` in RabbitMQ dashboard — your message is safely queued for reprocessing.
+
+![System Architecture](images/demo1.png)
+![System Architecture](images/demo2.png)
+
+
 
 ---
 

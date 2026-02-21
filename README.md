@@ -1,83 +1,82 @@
 # 🔔 Notification Microservice — Payroll System
 
-An **event-driven, production-grade Notification Microservice** built with **FastAPI**, **RabbitMQ**, and **PostgreSQL**.
+An **event-driven, production-grade Notification Microservice** built using **FastAPI**, **RabbitMQ**, and **PostgreSQL**.
+This service asynchronously processes payroll events and delivers notifications through Email and SMS channels while maintaining complete audit tracking and retry handling.
 
 ---
 
-## Architecture
+## 🏗️ System Architecture
 
 ```
 Payroll System
       ↓
-   RabbitMQ Broker  (topic exchange: payroll_events)
+RabbitMQ Broker (topic exchange: payroll_events)
       ↓
-Notification Consumer  (aio-pika async consumer)
+Notification Consumer (Async aio-pika)
       ↓
-Template Processor  (Jinja2 rendering)
+Template Processor (Jinja2 Rendering)
       ↓
-Channel Service  (Email via SMTP / SMS via Mock Provider)
+Channel Service
+   ├── Email (SMTP)
+   └── SMS (Mock Provider)
       ↓
-PostgreSQL Audit Database  (notifications + notification_logs)
+PostgreSQL Audit Database
+   ├── notifications
+   └── notification_logs
 ```
 
 ---
 
-## Tech Stack
+## ⚙️ Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | FastAPI (Python 3.11+) |
-| Messaging | RabbitMQ + aio-pika |
-| Database | PostgreSQL + SQLAlchemy 2.0 (async) + Alembic |
-| Email | aiosmtplib (SMTP) |
-| SMS | Mock provider (replace with Twilio/MSG91) |
-| Templates | Jinja2 |
-| Logging | structlog (JSON structured logs) |
-| Testing | pytest + pytest-asyncio |
+| Layer     | Technology                          |
+| --------- | ----------------------------------- |
+| Framework | FastAPI (Python 3.11+)              |
+| Messaging | RabbitMQ + aio-pika                 |
+| Database  | PostgreSQL + SQLAlchemy 2.0 (Async) |
+| Migration | Alembic                             |
+| Email     | aiosmtplib (SMTP)                   |
+| SMS       | Mock Provider (Twilio/MSG91 ready)  |
+| Templates | Jinja2                              |
+| Logging   | structlog (JSON structured logging) |
+| Testing   | pytest + pytest-asyncio             |
 
 ---
 
-## Project Structure
+## 📁 Project Structure
 
 ```
 notification_service/
 │
 ├── app/
-│   ├── main.py                    # FastAPI app, lifespan hooks
+│   ├── main.py
 │   ├── config/
-│   │   ├── settings.py            # Pydantic settings (env-based config)
-│   │   └── logging.py             # Structured logging setup
+│   │   ├── settings.py
+│   │   └── logging.py
 │   ├── consumers/
-│   │   └── payroll_consumer.py    # RabbitMQ async consumer
+│   │   └── payroll_consumer.py
 │   ├── services/
-│   │   ├── notification_service.py  # Core orchestration logic
-│   │   └── retry_service.py         # Exponential backoff + DLQ routing
+│   │   ├── notification_service.py
+│   │   └── retry_service.py
 │   ├── channels/
-│   │   ├── email_service.py       # SMTP email with attachment download
-│   │   └── sms_service.py         # SMS mock provider
+│   │   ├── email_service.py
+│   │   └── sms_service.py
 │   ├── templates/
-│   │   ├── message_templates.py   # Template strings per event type
-│   │   └── renderer.py            # Jinja2 rendering engine
+│   │   ├── message_templates.py
+│   │   └── renderer.py
 │   ├── models/
-│   │   └── notification.py        # SQLAlchemy ORM models
+│   │   └── notification.py
 │   ├── schemas/
-│   │   └── events.py              # Pydantic validation schemas
+│   │   └── events.py
 │   ├── db/
-│   │   └── base.py                # Async engine, session factory
+│   │   └── base.py
 │   ├── security/
-│   │   └── validator.py           # Auth token + data masking
+│   │   └── validator.py
 │   └── api/
-│       └── routes.py              # REST API routes
+│       └── routes.py
 │
 ├── migrations/
-│   ├── env.py
-│   └── versions/
-│       └── 0001_initial.py
 ├── tests/
-│   ├── conftest.py
-│   ├── test_event_validation.py
-│   ├── test_notification_service.py
-│   └── test_retry.py
 ├── requirements.txt
 ├── alembic.ini
 └── README.md
@@ -85,59 +84,85 @@ notification_service/
 
 ---
 
-## Supported Events
+## 📢 Supported Payroll Events
 
-| Event | Channel | Trigger |
-|-------|---------|---------|
-| `SalaryCredited` | SMS | Salary credited to bank |
-| `PayslipGenerated` | Email + Attachment | Monthly payslip ready |
-| `BonusCredited` | SMS | Bonus payment credited |
-| `OvertimeCalculated` | Email + Attachment | Overtime report ready |
-| `BankDetailsUpdated` | SMS | Bank account changed |
+| Event              | Channel | Description                  |
+| ------------------ | ------- | ---------------------------- |
+| SalaryCredited     | SMS     | Salary credited notification |
+| PayslipGenerated   | Email   | Payslip with attachment      |
+| BonusCredited      | SMS     | Bonus payment alert          |
+| OvertimeCalculated | Email   | Overtime report              |
+| BankDetailsUpdated | SMS     | Bank account update alert    |
 
 ---
 
-## Setup & Installation
+## 🚀 Setup & Installation
 
-### 1. Install dependencies
+### 1️⃣ Clone Repository
 
 ```bash
+git clone https://github.com/3deiva/Notification_microservice.git
 cd notification_service
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
 pip install -r requirements.txt
 ```
 
-### 2. Configure environment
+### 3️⃣ Configure Environment Variables
 
 Create a `.env` file:
 
 ```env
 DATABASE_URL=postgresql+asyncpg://postgres:postgres@localhost:5432/notifications
 RABBITMQ_URL=amqp://guest:guest@localhost:5672/
+
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USERNAME=your@email.com
 SMTP_PASSWORD=yourpassword
 SMTP_FROM_EMAIL=noreply@payroll.com
+
 AUTH_TOKEN=secure-token
 ```
 
-### 3. Run database migrations
+---
+
+### 4️⃣ Run Database Migrations
 
 ```bash
 alembic upgrade head
 ```
 
-### 4. Start the service
+---
+
+### 5️⃣ Start Notification Service
 
 ```bash
 uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
+Service runs at:
+
+```
+http://localhost:8000
+```
+
+Swagger Docs:
+
+```
+http://localhost:8000/docs
+```
+
 ---
 
-## REST API
+## 🔌 REST API
 
-### GET /health
+### Health Check
+
+**GET /health**
 
 ```json
 {
@@ -146,7 +171,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 }
 ```
 
-### GET /notifications/{employee_id}
+---
+
+### Fetch Notifications
+
+**GET /notifications/{employee_id}**
 
 ```json
 [
@@ -159,13 +188,11 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000
 ]
 ```
 
-Swagger docs: `http://localhost:8000/docs`
-
 ---
 
-## Event Input Format (RabbitMQ)
+## 📨 Event Message Format (RabbitMQ)
 
-All messages published to the `payroll_events` exchange must follow:
+Messages published to `payroll_events` exchange:
 
 ```json
 {
@@ -178,47 +205,78 @@ All messages published to the `payroll_events` exchange must follow:
     "name": "Arun Kumar",
     "phone": "9876543210"
   },
-  "payload": { ... }
+  "payload": {}
 }
 ```
 
 ---
 
-## Retry & Failure Handling
+## 🔁 Retry & Failure Handling
 
-- **Max retries:** 3
-- **Backoff:** Exponential (1s → 2s → 4s)
-- **Dead Letter Queue:** `notification_dlq`
-- All attempts logged to `notification_logs`
+- Maximum retries: **3**
+- Backoff strategy: **Exponential (1s → 2s → 4s)**
+- Dead Letter Queue: `notification_dlq`
+- All attempts logged in `notification_logs`
 
 ---
 
-## Running Tests
+## 🧪 Running Tests
 
 ```bash
 pytest -v
 ```
 
-Tests use an in-memory SQLite database — no external services required.
+Tests run using an in-memory SQLite database.
 
 ---
 
-## Security
+## 🔐 Security Features
 
-- `auth_token` validated on every event
-- Phone numbers and emails masked in logs
-- No salary or bank data persisted beyond notification metadata
-- Audit logs are immutable (append-only via ORM)
+- Event authentication via `auth_token`
+- Sensitive data masked in logs
+- No financial data persistence
+- Immutable audit logging
 
 ---
 
-## SMS Production Setup
+## 📱 SMS Production Integration
 
-Replace `SMSService._call_provider` with your gateway of choice:
+Replace mock provider:
 
 ```python
-# Example: Twilio
 from twilio.rest import Client
+
 client = Client(TWILIO_SID, TWILIO_TOKEN)
-message = client.messages.create(body=message, from_="+1...", to=phone)
+client.messages.create(
+    body=message,
+    from_="+1XXXX",
+    to=phone
+)
 ```
+
+---
+
+## 📈 Key Engineering Concepts
+
+- Event-Driven Architecture
+- Asynchronous Processing
+- Message Queue Decoupling
+- Retry + Dead Letter Queues
+- Structured Logging
+- Clean Service Layer Design
+- Production-ready Microservice Pattern
+
+---
+
+## 👨‍💻 Author
+
+**Deiva Raja B**
+IT Engineering Student | Backend & System Design Enthusiast
+
+GitHub: https://github.com/3deiva
+
+---
+
+## 📄 License
+
+This project is created for educational and system design demonstration purposes.

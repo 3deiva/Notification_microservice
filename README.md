@@ -1,4 +1,4 @@
-# 🔔 Notification Microservice — Payroll System
+#  Notification Microservice — Payroll System
 
 > **TEAM A² - (AGILE × ALLIANCE)**
 > 
@@ -6,7 +6,7 @@
 
 ---
 
-## 📋 Table of Contents
+##  Table of Contents
 
 1. [Problem Statement & Our Interpretation](#1-problem-statement--our-interpretation)
 2. [Payroll Context — What We Inferred](#2-payroll-context--what-we-inferred)

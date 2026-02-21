@@ -1128,6 +1128,7 @@ curl http://localhost:8000/health
   "service": "notification-service"
 }
 ```
+![System Architecture](images/health.png)
 
 ---
 
@@ -1159,6 +1160,7 @@ curl http://localhost:8000/notifications/EMP001
 ```
 
 **Swagger UI (interactive, auto-generated):** `http://localhost:8000/docs`
+![System Architecture](images/empstatus.png)
 
 ---
 
@@ -1305,6 +1307,7 @@ tests/test_retry.py::test_zero_max_retries_immediate_dlq                  PASSED
 
 15 passed in 2.41s
 ```
+![System Architecture](images/testing.png)
 
 ---
 
@@ -1404,6 +1407,14 @@ Use the routing key and payload for each event. After publishing, check:
 | 3 | BonusCredited | `payroll.bonus` | 📱 SMS | Bonus credit alert on phone |
 | 4 | OvertimeCalculated | `payroll.overtime` | 📧 Email | Overtime statement email with PDF |
 | 5 | BankDetailsUpdated | `payroll.bank` | 📱 SMS | Security alert SMS |
+
+![System Architecture](images/event1.jpeg)
+![System Architecture](images/event2.jpeg)
+![System Architecture](images/event3.jpeg)
+![System Architecture](images/event4.jpeg)
+![System Architecture](images/event5.jpeg)
+
+
 
 **Payloads for each event are in [Section 12](#12-event-input-contracts).**
 

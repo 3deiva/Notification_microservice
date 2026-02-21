@@ -825,7 +825,7 @@ This ensures logs can be shared with support teams or stored long-term without e
          📧 Employee Email           📱 Employee Phone
         (Gmail SMTP — real)        (Twilio SMS — real)
 ```
-![System Architecture](images/archi.png)
+![System Architecture](images/archi.jpeg)
 ---
 
 ## 11. Project Structure

@@ -166,9 +166,6 @@ Payroll has confidential computation logic. Notification has delivery logic. Mix
 
 We operated as a proper Scrum team with defined roles and responsibilities throughout the project.
 
-### 👤 Product Owner
-Responsible for defining what the system must do from a business perspective. Owned the product backlog, wrote and prioritized user stories, and made decisions on scope. In our context, the Product Owner defined the five payroll events, the notification channels per event, and what data each notification must carry. The Product Owner was the bridge between the business problem and the development team.
-
 ### 👤 Scrum Master
 Facilitated all Scrum ceremonies — Sprint Zero, Sprint Planning, Sprint Reviews, and Retrospectives. Ensured the team followed Agile principles, removed blockers, and kept sprints focused. The Scrum Master also enforced the Definition of Done for each user story so that "done" meant truly done — not just coded, but tested, documented, and logged.
 

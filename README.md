@@ -1,3 +1,26 @@
+the project and draft work is going on so read later
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 🔔 Notification Microservice — Payroll System
 
 An **event-driven, production-grade Notification Microservice** built using **FastAPI**, **RabbitMQ**, and **PostgreSQL**.

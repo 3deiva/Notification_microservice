@@ -1,6 +1,6 @@
 # 🔔 Notification Microservice — Payroll System
 
-> **Built for Congruent Technologies | Agile Scrum Delivery | Event-Driven Microservice Architecture**
+> **TEAM A SQUARE - (AGILE * ALLIANCE)**
 
 ---
 

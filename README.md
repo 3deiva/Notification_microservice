@@ -1,7 +1,49 @@
 the project and draft work is going on so read later
 
 
+.
+.
+.
 
+.
+..
+.....
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+...
+.
+.
+
+..
+
+'
+'
+'
+'
+'
+'
+'
+'
+'
 
 
 

@@ -1076,7 +1076,7 @@ Attachment: overtime PDF
 Dear Karthik Raja, your bank account (XXXX1234) has been updated successfully.
 If this wasn't you, contact HR immediately.
 ```
-
+![System Architecture](images/rabbitmq.png)
 ---
 
 ## 13. Database Design
@@ -1094,6 +1094,8 @@ If this wasn't you, contact HR immediately.
 | created_at | TIMESTAMP | When the notification was first created |
 | updated_at | TIMESTAMP | When the record was last updated |
 
+![System Architecture](images/db1.png)
+
 ### Table: notification_logs
 
 | Column | Type | Description |
@@ -1104,7 +1106,11 @@ If this wasn't you, contact HR immediately.
 | error_message | TEXT | Error details on failure |
 | timestamp | TIMESTAMP | When this log entry was created |
 
+![System Architecture](images/db2.png)
+
+
 **Why two tables?** The `notifications` table tracks the overall delivery outcome. The `notification_logs` table tracks every individual attempt — including all retries. This separation gives complete audit visibility without bloating the main notifications record with retry details.
+
 
 ---
 
